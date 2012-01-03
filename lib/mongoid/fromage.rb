@@ -56,7 +56,7 @@ module Mongoid
       attr_accessor :roles
 
       def fromages(*argv)
-        self.roles = *argv
+        self.roles = argv
 
         self.roles.each do |role|
           define_method "#{role}?" do
