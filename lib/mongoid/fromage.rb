@@ -45,7 +45,7 @@ module Mongoid
       protected
 
       def valid_roles?
-        unless self.roles.all? {|roles| self.class.roles.include? roles }
+        if (self.roles - self.class.roles).any?
           errors.add(:roles, :not_included)
         end
       end
