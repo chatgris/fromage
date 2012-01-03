@@ -26,7 +26,7 @@ module Mongoid
       end
 
       def remove_role(role)
-        self.roles = self.roles.tap {|roles| roles.delete(role)}
+        self.roles.tap {|roles| roles.delete(role)}
       end
 
       def remove_role!(role)
