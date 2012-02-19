@@ -15,41 +15,38 @@ module Mongoid
       scope :all_role, lambda {|*role| all_in(:roles => role)}
     end
 
-    module InstanceMethods
-      def add_role(*roles)
-        self.roles += roles
+    def add_role(*roles)
+      self.roles += roles
+    end
+
+    def add_role!(*args)
+      self.add_role(*args)
+      self.save
+    end
+
+    def remove_role(role)
+      self.roles.tap {|roles| roles.delete(role)}
+    end
+
+    def remove_role!(role)
+      self.remove_role(role)
+      self.save
+    end
+
+    def has_role?(role)
+      self.roles.include? role
+    end
+
+    def has_roles?(*args)
+      args.all? {|role| self.has_role?(role) }
+    end
+
+    protected
+
+    def valid_roles?
+      if (self.roles - self.class.roles).any?
+        errors.add(:roles, :not_included)
       end
-
-      def add_role!(*args)
-        self.add_role(*args)
-        self.save
-      end
-
-      def remove_role(role)
-        self.roles.tap {|roles| roles.delete(role)}
-      end
-
-      def remove_role!(role)
-        self.remove_role(role)
-        self.save
-      end
-
-      def has_role?(role)
-        self.roles.include? role
-      end
-
-      def has_roles?(*args)
-        args.all? {|role| self.has_role?(role) }
-      end
-
-      protected
-
-      def valid_roles?
-        if (self.roles - self.class.roles).any?
-          errors.add(:roles, :not_included)
-        end
-      end
-
     end
 
     module ClassMethods
