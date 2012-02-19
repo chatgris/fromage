@@ -15,7 +15,7 @@ Install it with rubygems:
 With bundler, add it to your `Gemfile`:
 
 ``` ruby
-gem "fromage", "~>0.0.2"
+gem "fromage", "~>0.0.3"
 ```
 
 Usage
