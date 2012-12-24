@@ -14,8 +14,6 @@ Gem::Specification.new do |s|
   s.files        = `git ls-files app lib`.split("\n")
   s.platform     = Gem::Platform::RUBY
   s.require_path = 'lib'
-  s.add_development_dependency "rspec",         "~>2.7"
-  s.add_development_dependency "activesupport", "~>3.1"
-  s.add_development_dependency "mongoid",       "~>2.3"
-  s.add_development_dependency "bson_ext",      "~>1.5"
+  s.add_development_dependency "rspec"
+  s.add_development_dependency "mongoid"
 end
