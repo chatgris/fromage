@@ -8,10 +8,10 @@ Gem::Specification.new do |s|
   s.version      = Fromage::VERSION
   s.authors      = ["chatgris"]
   s.email        = "jboyer@af83.com"
-  s.homepage     = "https://github.com/chatgris/fromage"
+  s.homepage     = "http://chatgris.github.com/fromage"
   s.summary      = "Role model for mongoid."
   s.description  = "Role model for mongoid."
-  s.files        = `git ls-files app lib`.split("\n")
+  s.files        = `git ls-files LICENSE README.md lib`.split("\n")
   s.platform     = Gem::Platform::RUBY
   s.require_path = 'lib'
   s.add_development_dependency "rspec"
