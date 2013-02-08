@@ -8,7 +8,8 @@ module Mongoid
     extend ::ActiveSupport::Concern
 
     included do
-      field :roles, type: Array, default: []
+      class_attribute :fromage_defaults
+      field :roles, type: Array, default: lambda { Array(self.fromage_defaults) }
       validate :roles, :valid_roles?
 
       scope :any_role, lambda {|*role| any_in(:roles => role)}
@@ -53,8 +54,12 @@ module Mongoid
       attr_accessor :roles
 
       def fromages(*argv)
+        if argv.last.is_a?(Hash)
+          options = argv.pop
+        end
         self.roles = argv
 
+        # define helper methods for roles
         self.roles.each do |role|
           define_method "#{role}?" do
             self.has_role? role
@@ -67,6 +72,10 @@ module Mongoid
           define_method "un_#{role}!" do
             self.remove_role!(role)
           end
+        end
+
+        if options && options.has_key?(:defaults)
+          self.fromage_defaults = options[:defaults]
         end
       end
     end
