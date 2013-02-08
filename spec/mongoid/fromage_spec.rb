@@ -8,6 +8,13 @@ class Person
   fromages :time_lord, :companion
 end
 
+class User
+  include Mongoid::Document
+  include Mongoid::Fromage
+
+  fromages :admin, :customer, defaults: [:customer]
+end
+
 describe Mongoid::Fromage do
 
   let(:person) { Person.new }
@@ -150,4 +157,17 @@ describe Mongoid::Fromage do
     end
   end
 
+  describe 'default role' do
+    let(:user) { User.new }
+
+    it 'can have a default role' do
+      user.tap {|u| u.save }.roles.should eq [:customer]
+    end
+
+    it 'add to default role' do
+      user.admin!
+      user.reload.roles.should eq [:customer, :admin]
+    end
+
+  end
 end
