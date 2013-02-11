@@ -13,7 +13,7 @@ Install it with rubygems:
 With bundler, add it to your `Gemfile`:
 
 ``` ruby
-gem "fromage"
+gem "fromage", require: 'mongoid/fromage'
 ```
 
 ## Usage
