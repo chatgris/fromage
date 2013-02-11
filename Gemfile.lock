@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    fromage (0.0.3)
+    fromage (0.2.0)
 
 GEM
   remote: http://rubygems.org/
