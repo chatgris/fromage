@@ -26,7 +26,7 @@ class Person
   include Mongoid::Document
   include Mongoid::Fromage
 
-  fromages :time_lord, :companion
+  fromages :time_lord, :companion, defaults: [:time_lord]
 end
 ```
 
