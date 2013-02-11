@@ -15,6 +15,13 @@ class User
   fromages :admin, :customer, defaults: [:customer]
 end
 
+class UserWithInvalidDefaults
+  include Mongoid::Document
+  include Mongoid::Fromage
+
+  fromages :admin, :customer, defaults: [:merchant]
+end
+
 describe Mongoid::Fromage do
 
   let(:person) { Person.new }
@@ -159,6 +166,7 @@ describe Mongoid::Fromage do
 
   describe 'default role' do
     let(:user) { User.new }
+    let(:user_invalid) { UserWithInvalidDefaults.new }
 
     it 'can have a default role' do
       user.tap {|u| u.save }.roles.should eq [:customer]
@@ -169,5 +177,8 @@ describe Mongoid::Fromage do
       user.reload.roles.should eq [:customer, :admin]
     end
 
+    it 'should fail on invalid default role' do
+      user_invalid.should_not be_valid
+    end
   end
 end
