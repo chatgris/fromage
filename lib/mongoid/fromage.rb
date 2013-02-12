@@ -9,7 +9,7 @@ module Mongoid
 
     included do
       class_attribute :fromage_defaults
-      field :roles, type: Array, default: lambda { Array(self.fromage_defaults) }
+      field :roles, type: Set, default: lambda { Array(self.fromage_defaults) }
       validate :roles, :valid_roles?
 
       scope :any_role, lambda {|*role| any_in(:roles => role)}
@@ -26,7 +26,7 @@ module Mongoid
     end
 
     def remove_role(role)
-      self.roles.tap {|roles| roles.delete(role)}
+      self.roles = self.roles.delete(role)
     end
 
     def remove_role!(role)
