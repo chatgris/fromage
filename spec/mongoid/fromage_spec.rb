@@ -70,7 +70,9 @@ describe Mongoid::Fromage do
       it 'several add_role should have uniq roles' do
         person.add_role(:time_lord)
         person.add_role(:time_lord)
-        person.valid?
+
+        person.should be_valid
+
         person.roles.size.should eq(1)
       end
     end
@@ -179,12 +181,12 @@ describe Mongoid::Fromage do
     let(:user_invalid) { UserWithInvalidDefaults.new }
 
     it 'can have a default role' do
-      user.tap {|u| u.save }.roles.should eq [:customer]
+      user.tap {|u| u.save }.roles.to_a.should eq [:customer]
     end
 
     it 'add to default role' do
       user.admin!
-      user.reload.roles.should eq [:customer, :admin]
+      user.reload.roles.should eq Set.new([:customer, :admin])
     end
 
     it 'should fail on invalid default role' do
