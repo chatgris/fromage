@@ -21,8 +21,8 @@ module Mongoid
     end
 
     def add_role!(*args)
-      self.add_role(*args)
-      self.save
+      add_role(*args)
+      save
     end
 
     def remove_role(role)
@@ -30,22 +30,22 @@ module Mongoid
     end
 
     def remove_role!(role)
-      self.remove_role(role)
-      self.save
+      remove_role(role)
+      save
     end
 
     def has_role?(role)
-      self.roles.include? role
+      roles.include? role
     end
 
     def has_roles?(*args)
-      args.all? {|role| self.has_role?(role) }
+      args.all? {|role| has_role?(role) }
     end
 
     protected
 
     def valid_roles?
-      if (self.roles - self.class.roles).any?
+      if (roles - self.class.roles).any?
         errors.add(:roles, :not_included)
       end
     end
@@ -60,17 +60,17 @@ module Mongoid
         self.roles = argv
 
         # define helper methods for roles
-        self.roles.each do |role|
+        roles.each do |role|
           define_method "#{role}?" do
-            self.has_role? role
+            has_role? role
           end
 
           define_method "#{role}!" do
-            self.add_role!(role)
+            add_role!(role)
           end
 
           define_method "un_#{role}!" do
-            self.remove_role!(role)
+            remove_role!(role)
           end
         end
 
