@@ -63,6 +63,16 @@ describe Mongoid::Fromage do
         person.reload.roles.should include :time_lord
         person.reload.roles.should include :companion
       end
+
+    end
+
+    context 'with validation' do
+      it 'several add_role should have uniq roles' do
+        person.add_role(:time_lord)
+        person.add_role(:time_lord)
+        person.valid?
+        person.roles.size.should eq(1)
+      end
     end
   end
 
