@@ -43,6 +43,10 @@ Person.any_role(:time_lord, :companion)
 Person.all_role(:time_lord, :companion)
 ```
 
+## Contrib
+
+You will find `simple_form` roles input example in `contrib` directory.
+
 ## Copyright
 
 MIT. See LICENSE for further details.
