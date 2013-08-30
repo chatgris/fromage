@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.homepage     = "http://chatgris.github.com/fromage"
   s.summary      = "Role model for mongoid."
   s.description  = "Role model for mongoid."
+  s.license      = 'MIT'
   s.files        = `git ls-files LICENSE README.md lib`.split("\n")
   s.platform     = Gem::Platform::RUBY
   s.require_path = 'lib'
