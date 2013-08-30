@@ -1,10 +1,10 @@
 PATH
   remote: .
   specs:
-    fromage (0.2.0)
+    fromage (0.3.1)
 
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     activemodel (3.2.9)
       activesupport (= 3.2.9)
